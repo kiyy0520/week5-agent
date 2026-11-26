@@ -1,0 +1,82 @@
+[
+  {
+    "id": "T01",
+    "category": "simple_read",
+    "difficulty": "easy",
+    "description": "查询北京今天的天气",
+    "expected_tools": ["get_weather"],
+    "max_steps": 3
+  },
+  {
+    "id": "T02",
+    "category": "simple_read",
+    "difficulty": "easy",
+    "description": "查询美元兑人民币的当前汇率",
+    "expected_tools": ["get_exchange_rate"],
+    "max_steps": 3
+  },
+  {
+    "id": "T03",
+    "category": "simple_read",
+    "difficulty": "easy",
+    "description": "搜索一条关于人工智能的最新新闻",
+    "expected_tools": ["search_news"],
+    "max_steps": 3
+  },
+  {
+    "id": "T04",
+    "category": "multi_read",
+    "difficulty": "medium",
+    "description": "先查询上海天气，再查询欧元兑人民币汇率",
+    "expected_tools": ["get_weather", "get_exchange_rate"],
+    "max_steps": 5
+  },
+  {
+    "id": "T05",
+    "category": "read_write",
+    "difficulty": "medium",
+    "description": "查询用户余额，然后给用户转账100元",
+    "expected_tools": ["get_balance", "transfer_money"],
+    "max_steps": 6
+  },
+  {
+    "id": "T06",
+    "category": "multi_read",
+    "difficulty": "medium",
+    "description": "搜索关于新能源车的新闻，并总结成三句话",
+    "expected_tools": ["search_news", "summarize"],
+    "max_steps": 5
+  },
+  {
+    "id": "T07",
+    "category": "simple_write",
+    "difficulty": "medium",
+    "description": "帮我创建一条待办事项：明天上午10点开项目会",
+    "expected_tools": ["create_todo"],
+    "max_steps": 4
+  },
+  {
+    "id": "T08",
+    "category": "conditional_write",
+    "difficulty": "hard",
+    "description": "查询用户余额，如果余额大于500元，则给用户转账200元；否则不转账并说明原因",
+    "expected_tools": ["get_balance", "transfer_money"],
+    "max_steps": 8
+  },
+  {
+    "id": "T09",
+    "category": "multi_read",
+    "difficulty": "hard",
+    "description": "分别查询北京天气、美元兑人民币汇率、一条科技新闻，最后汇总成一段简报",
+    "expected_tools": ["get_weather", "get_exchange_rate", "search_news"],
+    "max_steps": 8
+  },
+  {
+    "id": "T10",
+    "category": "write_verify",
+    "difficulty": "hard",
+    "description": "创建一个金额为300元的订单，然后查询该订单的状态确认是否创建成功",
+    "expected_tools": ["create_order", "get_order_status"],
+    "max_steps": 8
+  }
+]

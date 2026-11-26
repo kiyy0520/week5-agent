@@ -1,0 +1,10 @@
+﻿trace_id,task_id,badcase_type,layer,root_cause,evidence
+trace_51d848c4,task_001,工具选择错误,工具选择,意图识别偏差，该选 weather_query 却选 news_search,"step1 tool=news_search, params={'query':'北京明天天气'}"
+trace_87d3ca69,task_002,参数错误,参数生成,枚举越界，schema 只允许城市名，传入 '上海浦东新区',"step1 params.city=上海浦东新区, error_type=schema_error"
+trace_5066379e,task_003,工具返回异常,工具返回,下游天气服务超时，重试 2 次仍失败,"step1 error_type=timeout, is_retry=true"
+trace_238d8cc7,task_004,忽略返回,忽略返回,模型未采用工具返回的晴天结果，回答可能下雨,"step1 result={'city': '深圳', 'date': '2026-05-20', 'weather': '晴', 'temp': 26}; final_answer=深圳今天可能下雨，建议带伞。"
+trace_b49b2baf,task_005,参数错误,参数生成,"缺必填参数 b，calculator 需要 a,b,op","step1 params={'a':23,'op':'*'}, 缺 b, error_type=schema_error"
+trace_be6016c7,task_006,工具选择错误,工具选择,该选未选，未调用 weather_query 直接凭记忆回答,trace 中无 weather_query 调用 step，step1 tool=None
+trace_f2ac9e60,task_007,参数错误,参数生成,参数枚举越界（op='divide'），导致下游报错，且模型忽略报错瞎答,"step1 params.op=divide, error_type=schema_error; final_answer=结果是 0。"
+trace_bf7d455c,task_008,工具返回异常,工具返回,下游 429 限流，重试 1 次仍失败，且模型忽略报错,"step1 error_type=429, is_retry=true; final_answer=日程已成功删除。"
+trace_8247fc4b,task_009,安全越权,工具选择,高危操作绕过了审批流程，直接执行了工具,"step1 need_approval=False, result={'status':'deleted'}"

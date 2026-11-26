@@ -1,0 +1,63 @@
+[
+  {
+    "fault_id": "F01",
+    "tool": "get_weather",
+    "fault_type": "timeout",
+    "trigger_on_call": 1,
+    "duration_seconds": 10,
+    "target_task": "T01",
+    "note": "读操作超时，验证治理版超时后降级而非卡死"
+  },
+  {
+    "fault_id": "F02",
+    "tool": "get_exchange_rate",
+    "fault_type": "5xx",
+    "trigger_on_call": 1,
+    "target_task": "T02",
+    "note": "服务器内部错误，验证治理版重试或降级"
+  },
+  {
+    "fault_id": "F03",
+    "tool": "search_news",
+    "fault_type": "429",
+    "trigger_on_call": 1,
+    "retry_after_seconds": 2,
+    "target_task": "T03",
+    "note": "被限流，验证治理版退避重试而非立刻失败"
+  },
+  {
+    "fault_id": "F04",
+    "tool": "transfer_money",
+    "fault_type": "timeout",
+    "trigger_on_call": 1,
+    "duration_seconds": 10,
+    "target_task": "T05",
+    "note": "写操作超时，验证治理版不盲目重试、不重复扣款，走查证降级"
+  },
+  {
+    "fault_id": "F05",
+    "tool": "create_order",
+    "fault_type": "timeout",
+    "trigger_on_call": 1,
+    "duration_seconds": 10,
+    "target_task": "T10",
+    "note": "写操作超时，验证治理版创建订单不确定时不重复下单"
+  },
+  {
+    "fault_id": "F06",
+    "tool": "get_order_status",
+    "fault_type": "empty",
+    "trigger_on_call": 1,
+    "target_task": "T10",
+    "note": "空返回，验证治理版识别空结果并兜底，而非把空当成功"
+  },
+  {
+    "fault_id": "F07",
+    "tool": "get_balance",
+    "fault_type": "timeout",
+    "trigger_on_call": 1,
+    "duration_seconds": 10,
+    "target_task": "T05",
+    "note": "读操作超时叠加，验证治理版能重试恢复并继续后续写操作"
+  }
+]

@@ -1,0 +1,18 @@
+# Week5 Agent —— 容器运行依赖（runtime only）
+# 由代码 import 反推得出，仅保留 docker 镜像内真正需要的第三方包
+# Python 版本：3.11（镜像）/ 本地 .venv 为 3.14.2，两者均可安装
+
+fastapi==0.162.5
+uvicorn==0.54.0
+jsonschema==4.26.0
+pydantic==2.14.3
+
+# —— 逐条依据 ——
+# fastapi    app/main.py 的 FastAPI 实例与 POST /run、POST /approve 路由
+# uvicorn    启动命令 uvicorn app.main:app 的 ASGI 服务器（代码内无 import，但容器必需）
+# jsonschema tools/schema.py 的参数校验，治理层运行时组件
+# pydantic   fastapi 的传输依赖（schemas.py 用标准库 dataclass，请求体解析依赖 pydantic 2.x），显式锁定防漂移
+
+# —— 以下不属于运行镜像，需要时另装 ——
+# pytest==9.2.0    tests/ 三个单测文件；不进运行镜像
+# mcp==1.30.0       mcp_server/ 的 stdio 演示入口才 import mcp，app 层不加载
